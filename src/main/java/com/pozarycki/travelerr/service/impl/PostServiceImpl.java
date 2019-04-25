@@ -1,6 +1,6 @@
 package com.pozarycki.travelerr.service.impl;
 
-import com.pozarycki.travelerr.model.Post;
+import com.pozarycki.travelerr.domain.Post;
 import com.pozarycki.travelerr.service.PostService;
 import org.springframework.stereotype.Service;
 

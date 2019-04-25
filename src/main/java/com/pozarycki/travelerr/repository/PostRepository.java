@@ -1,6 +1,6 @@
 package com.pozarycki.travelerr.repository;
 
-import com.pozarycki.travelerr.model.Post;
+import com.pozarycki.travelerr.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

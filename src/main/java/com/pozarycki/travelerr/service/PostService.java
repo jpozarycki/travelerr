@@ -1,6 +1,6 @@
 package com.pozarycki.travelerr.service;
 
-import com.pozarycki.travelerr.model.Post;
+import com.pozarycki.travelerr.domain.Post;
 
 import java.util.List;
 

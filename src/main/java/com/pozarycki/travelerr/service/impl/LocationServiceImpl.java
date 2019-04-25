@@ -1,6 +1,6 @@
 package com.pozarycki.travelerr.service.impl;
 
-import com.pozarycki.travelerr.model.Location;
+import com.pozarycki.travelerr.domain.Location;
 import com.pozarycki.travelerr.service.LocationService;
 import org.springframework.stereotype.Service;
 

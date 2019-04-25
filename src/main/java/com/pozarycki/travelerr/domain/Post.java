@@ -1,4 +1,4 @@
-package com.pozarycki.travelerr.model;
+package com.pozarycki.travelerr.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class Post extends BaseEntity {
     private Location location;
 
     @NotNull
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url")
     private String imageUrl;
 
     @NotNull

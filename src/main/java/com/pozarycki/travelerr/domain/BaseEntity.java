@@ -1,4 +1,4 @@
-package com.pozarycki.travelerr.model;
+package com.pozarycki.travelerr.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
