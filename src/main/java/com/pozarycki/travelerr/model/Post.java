@@ -22,12 +22,8 @@ public class Post extends BaseEntity {
     private String title;
 
     @NotNull
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @NotNull
-    @Column(name = "country", nullable = false)
-    private String country;
+    @Column(name = "location", nullable = false)
+    private Location location;
 
     @NotNull
     @Column(name = "image_url", nullable = false)

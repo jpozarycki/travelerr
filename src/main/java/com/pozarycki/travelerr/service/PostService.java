@@ -6,11 +6,15 @@ import java.util.List;
 
 public interface PostService extends CrudService<Post, Long>{
 
-    Post findByCity(String city);
+    Post findPostByCity(String city);
 
-    List<Post> findAllByCity(String city);
+    List<Post> findAllPostsByCity(String city);
 
-    Post findByCountry(String country);
+    Post findPostByCountry(String country);
 
-    List<Post> findAllByCountry(String country);
+    List<Post> findAllPostsByCountry(String country);
+
+    Post findPostByUser(String userName);
+
+    List<Post> findAllPostsByUser(String userName);
 }
