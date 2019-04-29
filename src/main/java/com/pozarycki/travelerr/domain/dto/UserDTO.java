@@ -30,7 +30,8 @@ public class UserDTO {
     @Column(unique = true, nullable = false)
     private String email;
 
-    public UserDTO(){};
+    public UserDTO(){}
+
     public UserDTO(User user) {
         this.id = user.getId();
         this.email = user.getEmail();

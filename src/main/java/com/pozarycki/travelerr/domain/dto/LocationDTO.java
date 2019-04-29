@@ -15,6 +15,7 @@ public class LocationDTO {
     private String city;
 
     public LocationDTO(){}
+
     public LocationDTO(Location location){
 
         this.id=location.getId();

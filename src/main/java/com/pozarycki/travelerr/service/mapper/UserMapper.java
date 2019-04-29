@@ -5,9 +5,16 @@ import com.pozarycki.travelerr.domain.dto.UserDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UserMapper extends EntityMapper<UserDTO, User> {
 
-    UserDTO userToUserDTO (User user);
+    default User fromId (Long id){
+        if (id==null){
+            return null;
+        }
+        User user = new User();
+        user.setId(id);
+        return user;
 
-    User userDTOToUser (UserDTO userDTO);
+    }
+
 }

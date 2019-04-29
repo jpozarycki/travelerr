@@ -29,6 +29,7 @@ public class PostDTO {
     private PostType postType;
 
     public PostDTO(){}
+
     public PostDTO(Post post) {
         this.id=post.getId();
         this.locationDTO = new LocationDTO(post.getLocation());
