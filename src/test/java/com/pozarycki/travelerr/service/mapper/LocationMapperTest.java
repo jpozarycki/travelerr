@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+
 public class LocationMapperTest {
 
     private static final String DEFAULT_CITY_NAME = "some city";
@@ -28,22 +29,23 @@ public class LocationMapperTest {
         location.setId(DEFAULT_ID);
         location.setCity(DEFAULT_CITY_NAME);
         location.setCountry(DEFAULT_COUNTRY_NAME);
-        
+
         locationDTO = new LocationDTO(location);
 
     }
 
     @Test
-    public void locationToLocationDTOTest() {
+    public void locationToLocationDTOTest() throws Exception {
+
         LocationDTO locationDTOTest = locationMapper.toDto(location);
 
-        assertEquals(DEFAULT_CITY_NAME,locationDTOTest.getCity());
+        assertEquals(DEFAULT_CITY_NAME, locationDTOTest.getCity());
         assertEquals(DEFAULT_COUNTRY_NAME, locationDTOTest.getCountry());
         assertEquals(DEFAULT_ID, locationDTOTest.getId());
     }
 
     @Test
-    public void locationListToLocationDTOListTest() {
+    public void locationListToLocationDTOListTest() throws Exception {
         List<Location> locations = new ArrayList<>();
         locations.add(location);
         locations.add(new Location());
@@ -53,20 +55,20 @@ public class LocationMapperTest {
         List<LocationDTO> locationDTOS = locationMapper.toDto(locations);
 
         assertEquals(locations.size(), locationDTOS.size());
-        assertEquals(locations.get(DEFAULT_ID.intValue()).getCity(),locationDTOS.get(DEFAULT_ID.intValue()).getCity());
+        assertEquals(locations.get(DEFAULT_ID.intValue()).getCity(), locationDTOS.get(DEFAULT_ID.intValue()).getCity());
     }
 
     @Test
-    public void locationDTOToLocationTest() {
+    public void locationDTOToLocationTest() throws Exception {
         Location locationTest = locationMapper.toEntity(locationDTO);
 
-        assertEquals(DEFAULT_CITY_NAME,locationTest.getCity());
+        assertEquals(DEFAULT_CITY_NAME, locationTest.getCity());
         assertEquals(DEFAULT_COUNTRY_NAME, locationTest.getCountry());
         assertEquals(DEFAULT_ID, locationTest.getId());
     }
 
     @Test
-    public void locationDTOListToLocationListTest() {
+    public void locationDTOListToLocationListTest() throws Exception {
         List<LocationDTO> locationDTOS = new ArrayList<>();
         locationDTOS.add(locationDTO);
         locationDTOS.add(new LocationDTO());
@@ -76,13 +78,13 @@ public class LocationMapperTest {
 
         List<Location> locations = locationMapper.toEntity(locationDTOS);
 
-        assertEquals(locationDTOS.size(),locations.size());
-        assertEquals(locationDTOS.get(DEFAULT_ID.intValue()).getCity(),locations.get(DEFAULT_ID.intValue()).getCity());
-        assertEquals(locationDTOS.get(DEFAULT_ID.intValue()).getCountry(),locations.get(DEFAULT_ID.intValue()).getCountry());
+        assertEquals(locationDTOS.size(), locations.size());
+        assertEquals(locationDTOS.get(DEFAULT_ID.intValue()).getCity(), locations.get(DEFAULT_ID.intValue()).getCity());
+        assertEquals(locationDTOS.get(DEFAULT_ID.intValue()).getCountry(), locations.get(DEFAULT_ID.intValue()).getCountry());
     }
 
     @Test
-    public void fromIdTest() {
-        assertEquals(locationMapper.fromId(DEFAULT_ID).getId(),DEFAULT_ID);
+    public void fromIdTest() throws Exception {
+        assertEquals(locationMapper.fromId(DEFAULT_ID).getId(), DEFAULT_ID);
     }
 }
