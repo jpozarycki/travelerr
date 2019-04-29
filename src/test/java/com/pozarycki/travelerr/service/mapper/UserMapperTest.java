@@ -64,7 +64,7 @@ public class UserMapperTest {
     }
 
     @Test
-    public void userListToUserDtoList() {
+    public void userListToUserDtoList() throws Exception {
         List<User> users = new ArrayList<>();
         users.add(user);
         users.add(new User());
@@ -84,7 +84,7 @@ public class UserMapperTest {
     }
 
     @Test
-    public void userDTOListToUserList() {
+    public void userDTOListToUserList() throws Exception {
         List<UserDTO> userDTOS = new ArrayList<>();
         userDTOS.add(userDTO);
         userDTOS.add(new UserDTO());
@@ -103,7 +103,7 @@ public class UserMapperTest {
     }
 
     @Test
-    public void fromId() {
+    public void fromId() throws Exception {
         assertEquals(userMapper.fromId(DEFAULT_ID).getId(), DEFAULT_ID);
     }
 }
