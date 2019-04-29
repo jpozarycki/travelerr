@@ -7,10 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PostMapper extends EntityMapper<PostDTO, Post>{
 
-//    PostDTO postToPostDTO(Post post);
-//
-//    Post postDTOToPost(PostDTO postDTO);
-
     default Post fromId(Long id){
         if (id==null){
             return null;
