@@ -1,6 +1,7 @@
 package com.pozarycki.travelerr.domain.dto;
 
 import com.pozarycki.travelerr.domain.Post;
+import com.pozarycki.travelerr.domain.PostType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,12 +33,16 @@ public class PostDTO {
     @NotNull
     private LocalDate publishDate;
 
+    @NotNull
+    private PostType postType;
+
     public PostDTO(Post post) {
         this.id=post.getId();
         this.locationDTO = new LocationDTO(post.getLocation());
         this.imageUrl = post.getImageUrl();
         this.body = post.getBody();
         this.publishDate = post.getPublishDate();
+        this.postType = post.getPostType();
     }
 
 }

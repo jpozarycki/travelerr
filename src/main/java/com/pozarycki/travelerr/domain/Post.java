@@ -36,4 +36,8 @@ public class Post extends BaseEntity {
     @NotNull
     @Column(name = "publish_date", nullable = false)
     private LocalDate publishDate;
+
+    @NotNull
+    @Column(name = "post_type", nullable = false)
+    private PostType postType;
 }
