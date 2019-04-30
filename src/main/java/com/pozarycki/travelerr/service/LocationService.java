@@ -1,7 +1,7 @@
 package com.pozarycki.travelerr.service;
 
-import com.pozarycki.travelerr.domain.Location;
+import com.pozarycki.travelerr.domain.dto.LocationDTO;
 
-public interface LocationService extends CrudService<Location, Long> {
+public interface LocationService extends CrudService<LocationDTO, Long> {
 
 }

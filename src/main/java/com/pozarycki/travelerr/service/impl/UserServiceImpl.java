@@ -1,9 +1,11 @@
 package com.pozarycki.travelerr.service.impl;
 
 import com.pozarycki.travelerr.domain.User;
+import com.pozarycki.travelerr.domain.dto.LocationDTO;
 import com.pozarycki.travelerr.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Long aLong) {
+    public Optional<LocationDTO> findById(Long aLong) {
         return null;
     }
 

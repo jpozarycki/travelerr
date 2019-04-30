@@ -1,10 +1,10 @@
 package com.pozarycki.travelerr.service;
 
-import com.pozarycki.travelerr.domain.User;
+import com.pozarycki.travelerr.domain.dto.UserDTO;
 
-public interface UserService extends CrudService<User, Long>{
+public interface UserService extends CrudService<UserDTO, Long>{
 
-    User findByUserName(String userName);
+    UserDTO findByUserName(String userName);
 
 
 }

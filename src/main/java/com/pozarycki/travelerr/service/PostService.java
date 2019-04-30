@@ -1,20 +1,20 @@
 package com.pozarycki.travelerr.service;
 
-import com.pozarycki.travelerr.domain.Post;
+import com.pozarycki.travelerr.domain.dto.PostDTO;
 
 import java.util.List;
 
-public interface PostService extends CrudService<Post, Long>{
+public interface PostService extends CrudService<PostDTO, Long>{
 
-    Post findPostByCity(String city);
+    PostDTO findPostByCity(String city);
 
-    List<Post> findAllPostsByCity(String city);
+    List<PostDTO> findAllPostsByCity(String city);
 
-    Post findPostByCountry(String country);
+    PostDTO findPostByCountry(String country);
 
-    List<Post> findAllPostsByCountry(String country);
+    List<PostDTO> findAllPostsByCountry(String country);
 
-    Post findPostByUser(String userName);
+    PostDTO findPostByUser(String userName);
 
-    List<Post> findAllPostsByUser(String userName);
+    List<PostDTO> findAllPostsByUser(String userName);
 }

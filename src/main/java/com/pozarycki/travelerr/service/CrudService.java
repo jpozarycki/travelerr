@@ -1,11 +1,15 @@
 package com.pozarycki.travelerr.service;
 
-import java.util.Set;
+import com.pozarycki.travelerr.domain.dto.LocationDTO;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface CrudService<T,ID> {
-    Set<T> findAll();
 
-    T findById(ID id);
+    List<T> findAll();
+
+    Optional<LocationDTO> findById(ID id);
 
     T save(T object);
 
