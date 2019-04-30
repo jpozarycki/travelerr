@@ -75,11 +75,11 @@ public class UserMapperTest {
         List<UserDTO> userDTOS = userMapper.toDto(users);
 
         assertEquals(users.size(), userDTOS.size());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getEmail(), userDTOS.get(DEFAULT_ID.intValue()).getEmail());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getUserName(), userDTOS.get(DEFAULT_ID.intValue()).getUserName());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getPassword(), userDTOS.get(DEFAULT_ID.intValue()).getPassword());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getFirstName(), userDTOS.get(DEFAULT_ID.intValue()).getFirstName());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getLastName(), userDTOS.get(DEFAULT_ID.intValue()).getLastName());
+        assertEquals(users.get(0).getEmail(), users.get(0).getEmail());
+        assertEquals(users.get(0).getUserName(), users.get(0).getUserName());
+        assertEquals(users.get(0).getPassword(), users.get(0).getPassword());
+        assertEquals(users.get(0).getFirstName(), users.get(0).getFirstName());
+        assertEquals(users.get(0).getLastName(), users.get(0).getLastName());
 
     }
 
@@ -95,11 +95,11 @@ public class UserMapperTest {
         List<User> users = userMapper.toEntity(userDTOS);
 
         assertEquals(users.size(), userDTOS.size());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getEmail(), users.get(DEFAULT_ID.intValue()).getEmail());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getUserName(), users.get(DEFAULT_ID.intValue()).getUserName());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getPassword(), users.get(DEFAULT_ID.intValue()).getPassword());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getFirstName(), users.get(DEFAULT_ID.intValue()).getFirstName());
-        assertEquals(users.get(DEFAULT_ID.intValue()).getLastName(), users.get(DEFAULT_ID.intValue()).getLastName());
+        assertEquals(users.get(0).getEmail(), users.get(0).getEmail());
+        assertEquals(users.get(0).getUserName(), users.get(0).getUserName());
+        assertEquals(users.get(0).getPassword(), users.get(0).getPassword());
+        assertEquals(users.get(0).getFirstName(), users.get(0).getFirstName());
+        assertEquals(users.get(0).getLastName(), users.get(0).getLastName());
     }
 
     @Test

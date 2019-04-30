@@ -31,6 +31,7 @@ public class PostDTO {
     public PostDTO(){}
 
     public PostDTO(Post post) {
+        this.title=post.getTitle();
         this.id=post.getId();
         this.locationDTO = new LocationDTO(post.getLocation());
         this.imageUrl = post.getImageUrl();

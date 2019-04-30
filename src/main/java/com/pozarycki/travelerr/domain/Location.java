@@ -23,6 +23,14 @@ public class Location extends BaseEntity {
         this.city = city;
     }
 
+    @java.beans.ConstructorProperties({"id", "country", "city"})
+    public Location(Long id,@NotNull String country, @NotNull String city) {
+        super.setId(id);
+        this.country = country;
+        this.city = city;
+    }
+
+
     public Location() {
     }
 

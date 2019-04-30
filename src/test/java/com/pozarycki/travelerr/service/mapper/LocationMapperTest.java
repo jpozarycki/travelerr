@@ -79,8 +79,8 @@ public class LocationMapperTest {
         List<Location> locations = locationMapper.toEntity(locationDTOS);
 
         assertEquals(locationDTOS.size(), locations.size());
-        assertEquals(locationDTOS.get(DEFAULT_ID.intValue()).getCity(), locations.get(DEFAULT_ID.intValue()).getCity());
-        assertEquals(locationDTOS.get(DEFAULT_ID.intValue()).getCountry(), locations.get(DEFAULT_ID.intValue()).getCountry());
+        assertEquals(locationDTOS.get(0).getCity(), locations.get(0).getCity());
+        assertEquals(locationDTOS.get(0).getCountry(), locations.get(0).getCountry());
     }
 
     @Test

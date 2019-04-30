@@ -18,7 +18,7 @@ public class PostMapperTest {
 
     private static final Long DEFAULT_ID = 1L;
     private static final String DEFAULT_TITLE = "default title";
-    private static final Location DEFAULT_LOCATION = new Location("country", "city");
+    private static final Location DEFAULT_LOCATION = new Location(DEFAULT_ID,"country", "city");
     private static final String DEFAULT_IMAGE_URL = "http://www.imageurl.com";
     private static final String DEFAULT_BODY = "default body";
     private static final LocalDate DEFAULT_PUBLISH_DATE = LocalDate.now();
@@ -50,6 +50,7 @@ public class PostMapperTest {
         assertEquals(DEFAULT_ID, postDTOTest.getId());
         assertEquals(DEFAULT_BODY, postDTOTest.getBody());
         assertEquals(DEFAULT_IMAGE_URL, postDTOTest.getImageUrl());
+        assertEquals(DEFAULT_LOCATION.getId(), postDTOTest.getLocationDTO().getId());
         assertEquals(DEFAULT_LOCATION.getCountry(), postDTOTest.getLocationDTO().getCountry());
         assertEquals(DEFAULT_LOCATION.getCity(), postDTOTest.getLocationDTO().getCity());
         assertEquals(DEFAULT_POST_TYPE, postDTOTest.getPostType());
@@ -80,20 +81,19 @@ public class PostMapperTest {
 
         List<PostDTO> postDTOS = postMapper.toDto(posts);
 
-        assertEquals(posts.size(),postDTOS.size());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getBody(),postDTOS.get(DEFAULT_ID.intValue()).getBody());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getImageUrl(),postDTOS.get(DEFAULT_ID.intValue()).getImageUrl());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getPostType().toString(),postDTOS.get(DEFAULT_ID.intValue()).getPostType().toString());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getPublishDate(),postDTOS.get(DEFAULT_ID.intValue()).getPublishDate());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getTitle(),postDTOS.get(DEFAULT_ID.intValue()).getTitle());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getLocation().getCity(),postDTOS.get(DEFAULT_ID.intValue()).getLocationDTO().getCity());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getLocation().getCountry(),postDTOS.get(DEFAULT_ID.intValue()).getLocationDTO().getCountry());
+        assertEquals(postDTOS.size(), posts.size());
+        assertEquals(posts.get(0).getBody(),postDTOS.get(0).getBody());
+        assertEquals(posts.get(0).getImageUrl(),postDTOS.get(0).getImageUrl());
+        assertEquals(posts.get(0).getPostType(),postDTOS.get(0).getPostType());
+        assertEquals(posts.get(0).getPublishDate(),postDTOS.get(0).getPublishDate());
+        assertEquals(posts.get(0).getTitle(),postDTOS.get(0).getTitle());
+        assertEquals(posts.get(0).getLocation().getId(),postDTOS.get(0).getLocationDTO().getId());
     }
 
     @Test
     public void postDTOListToPostListTest() throws Exception {
         List<PostDTO> postDTOS = new ArrayList<>();
-        postDTOS.add(postDTO);
+        postDTOS.add(postMapper.toDto(post));
         postDTOS.add(new PostDTO());
         postDTOS.add(new PostDTO());
         postDTOS.add(new PostDTO());
@@ -102,13 +102,12 @@ public class PostMapperTest {
         List<Post> posts = postMapper.toEntity(postDTOS);
 
         assertEquals(postDTOS.size(), posts.size());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getBody(),postDTOS.get(DEFAULT_ID.intValue()).getBody());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getImageUrl(),postDTOS.get(DEFAULT_ID.intValue()).getImageUrl());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getPostType().toString(),postDTOS.get(DEFAULT_ID.intValue()).getPostType().toString());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getPublishDate(),postDTOS.get(DEFAULT_ID.intValue()).getPublishDate());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getTitle(),postDTOS.get(DEFAULT_ID.intValue()).getTitle());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getLocation().getCity(),postDTOS.get(DEFAULT_ID.intValue()).getLocationDTO().getCity());
-        assertEquals(posts.get(DEFAULT_ID.intValue()).getLocation().getCountry(),postDTOS.get(DEFAULT_ID.intValue()).getLocationDTO().getCountry());
+        assertEquals(posts.get(0).getBody(),postDTOS.get(0).getBody());
+        assertEquals(posts.get(0).getImageUrl(),postDTOS.get(0).getImageUrl());
+        assertEquals(posts.get(0).getPostType(),postDTOS.get(0).getPostType());
+        assertEquals(posts.get(0).getPublishDate(),postDTOS.get(0).getPublishDate());
+        assertEquals(posts.get(0).getTitle(),postDTOS.get(0).getTitle());
+        assertEquals(posts.get(0).getLocation().getId(),postDTOS.get(0).getLocationDTO().getId());
     }
 
     @Test
