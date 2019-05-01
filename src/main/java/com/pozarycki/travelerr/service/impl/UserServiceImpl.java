@@ -1,43 +1,63 @@
 package com.pozarycki.travelerr.service.impl;
 
 import com.pozarycki.travelerr.domain.User;
-import com.pozarycki.travelerr.domain.dto.LocationDTO;
+import com.pozarycki.travelerr.domain.dto.UserDTO;
+import com.pozarycki.travelerr.repository.UserRepository;
 import com.pozarycki.travelerr.service.UserService;
+import com.pozarycki.travelerr.service.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Override
-    public User findByUserName(String userName) {
-        return null;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public Set<User> findAll() {
-        return null;
+    public Optional<UserDTO> findByUserName(String userName) {
+        return userRepository.findByUserName(userName)
+                .map(userMapper::toDto);
     }
 
     @Override
-    public Optional<LocationDTO> findById(Long aLong) {
-        return null;
+    public List<UserDTO> findAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public User save(User object) {
-        return null;
+    public Optional<UserDTO> findById(Long aLong) {
+        return userRepository.findById(aLong)
+                .map(userMapper::toDto);
     }
 
     @Override
-    public void delete(User object) {
-
+    public UserDTO save(UserDTO object) {
+        User userSaved = userMapper.toEntity(object);
+        userRepository.save(userSaved);
+        return userMapper.toDto(userSaved);
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public Optional<Void> delete(UserDTO object) {
+        userRepository.delete(userMapper.toEntity(object));
+        return Optional.empty();
+    }
 
+    @Override
+    public Optional<Void> deleteById(Long aLong) {
+        userRepository.deleteById(aLong);
+        return Optional.empty();
     }
 }

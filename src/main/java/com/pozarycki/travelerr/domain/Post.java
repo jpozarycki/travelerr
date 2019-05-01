@@ -1,8 +1,6 @@
 package com.pozarycki.travelerr.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -15,6 +13,8 @@ public class Post extends BaseEntity {
     private String title;
 
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     @Column(name = "location", nullable = false)
     private Location location;
 
@@ -31,20 +31,31 @@ public class Post extends BaseEntity {
     private LocalDate publishDate;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "post_type", nullable = false)
     private PostType postType;
 
-    @java.beans.ConstructorProperties({"title", "location", "imageUrl", "body", "publishDate", "postType"})
-    public Post(@NotNull String title, @NotNull Location location, @NotNull String imageUrl, @NotNull String body, @NotNull LocalDate publishDate, @NotNull PostType postType) {
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Post() {
+    }
+
+    @java.beans.ConstructorProperties({"title", "location", "imageUrl", "body", "publishDate", "postType", "user"})
+    public Post(@NotNull String title, @NotNull Location location, @NotNull String imageUrl, @NotNull String body, @NotNull LocalDate publishDate, @NotNull PostType postType, @NotNull User user) {
         this.title = title;
         this.location = location;
         this.imageUrl = imageUrl;
         this.body = body;
         this.publishDate = publishDate;
         this.postType = postType;
+        this.user = user;
     }
 
-    public Post() {
+    protected boolean canEqual(final Object other) {
+        return other instanceof Post;
     }
 
     public @NotNull String getTitle() {
@@ -71,6 +82,10 @@ public class Post extends BaseEntity {
         return this.postType;
     }
 
+    public @NotNull User getUser() {
+        return this.user;
+    }
+
     public void setTitle(@NotNull String title) {
         this.title = title;
     }
@@ -93,6 +108,10 @@ public class Post extends BaseEntity {
 
     public void setPostType(@NotNull PostType postType) {
         this.postType = postType;
+    }
+
+    public void setUser(@NotNull User user) {
+        this.user = user;
     }
 
     public boolean equals(final Object o) {
@@ -119,11 +138,10 @@ public class Post extends BaseEntity {
         final Object this$postType = this.getPostType();
         final Object other$postType = other.getPostType();
         if (this$postType == null ? other$postType != null : !this$postType.equals(other$postType)) return false;
+        final Object this$user = this.getUser();
+        final Object other$user = other.getUser();
+        if (this$user == null ? other$user != null : !this$user.equals(other$user)) return false;
         return true;
-    }
-
-    protected boolean canEqual(final Object other) {
-        return other instanceof Post;
     }
 
     public int hashCode() {
@@ -141,10 +159,12 @@ public class Post extends BaseEntity {
         result = result * PRIME + ($publishDate == null ? 43 : $publishDate.hashCode());
         final Object $postType = this.getPostType();
         result = result * PRIME + ($postType == null ? 43 : $postType.hashCode());
+        final Object $user = this.getUser();
+        result = result * PRIME + ($user == null ? 43 : $user.hashCode());
         return result;
     }
 
     public String toString() {
-        return "Post(title=" + this.getTitle() + ", location=" + this.getLocation() + ", imageUrl=" + this.getImageUrl() + ", body=" + this.getBody() + ", publishDate=" + this.getPublishDate() + ", postType=" + this.getPostType() + ")";
+        return "Post(title=" + this.getTitle() + ", location=" + this.getLocation() + ", imageUrl=" + this.getImageUrl() + ", body=" + this.getBody() + ", publishDate=" + this.getPublishDate() + ", postType=" + this.getPostType() + ", user=" + this.getUser() + ")";
     }
 }

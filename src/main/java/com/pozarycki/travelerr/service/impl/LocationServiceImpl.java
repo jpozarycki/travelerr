@@ -45,14 +45,28 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public void delete(LocationDTO object) {
+    public Optional<Void> delete(LocationDTO object) {
         locationRepository.delete(
                 locationMapper.toEntity(object)
         );
+        return Optional.empty();
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public Optional<Void> deleteById(Long aLong) {
         locationRepository.deleteById(aLong);
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<LocationDTO> findByCity(String city) {
+        return locationRepository.findByCity(city)
+                .map(locationMapper::toDto);
+    }
+
+    @Override
+    public Optional<LocationDTO> findByCountry(String country) {
+        return locationRepository.findByCountry(country)
+                .map(locationMapper::toDto);
     }
 }

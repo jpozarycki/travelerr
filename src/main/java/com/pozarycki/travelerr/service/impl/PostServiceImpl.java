@@ -1,79 +1,95 @@
 package com.pozarycki.travelerr.service.impl;
 
-import com.pozarycki.travelerr.domain.dto.LocationDTO;
+import com.pozarycki.travelerr.domain.Post;
 import com.pozarycki.travelerr.domain.dto.PostDTO;
+import com.pozarycki.travelerr.repository.LocationRepository;
 import com.pozarycki.travelerr.repository.PostRepository;
+import com.pozarycki.travelerr.repository.UserRepository;
 import com.pozarycki.travelerr.service.PostService;
 import com.pozarycki.travelerr.service.mapper.PostMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final PostMapper postMapper;
+    private final LocationRepository locationRepository;
+    private final UserRepository userRepository;
 
-    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
+    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper, LocationRepository locationRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
+        this.locationRepository = locationRepository;
+        this.userRepository = userRepository;
     }
 
-    @Override
-    public PostDTO findPostByCity(String city) {
-        return null;
-    }
-
-    @Override
-    public List<PostDTO> findAllPostsByCity(String city) {
-        return null;
-    }
-
-    @Override
-    public PostDTO findPostByCountry(String country) {
-        return null;
-    }
-
-    @Override
-    public List<PostDTO> findAllPostsByCountry(String country) {
-        return null;
-    }
-
-    @Override
-    public PostDTO findPostByUser(String userName) {
-        return null;
-    }
-
-    @Override
-    public List<PostDTO> findAllPostsByUser(String userName) {
-        return null;
-    }
 
     @Override
     public List<PostDTO> findAll() {
-        return null;
+        return postRepository.findAll()
+                .stream()
+                .map(postMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<LocationDTO> findById(Long aLong) {
-        return Optional.empty();
+    public Optional<PostDTO> findById(Long aLong) {
+        return postRepository.findById(aLong)
+                .map(postMapper::toDto);
     }
 
     @Override
     public PostDTO save(PostDTO object) {
-        return null;
+        Post postSaved = postMapper.toEntity(object);
+        postRepository.save(postSaved);
+        return postMapper.toDto(postSaved);
     }
 
     @Override
-    public void delete(PostDTO object) {
-
+    public Optional<Void> delete(PostDTO object) {
+        postRepository.delete(postMapper.toEntity(object));
+        return Optional.empty();
     }
 
     @Override
-    public void deleteById(Long aLong) {
+    public Optional<Void> deleteById(Long aLong) {
+        postRepository.deleteById(aLong);
+        return Optional.empty();
+    }
 
+    @Override
+    public List<PostDTO> findAllPostsByCity(String city) {
+        return  locationRepository.findByCity(city)
+                .get()
+                .getPosts()
+                .stream()
+                .map(postMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostDTO> findAllPostsByCountry(String country) {
+        return locationRepository.findByCountry(country)
+                .get()
+                .getPosts()
+                .stream()
+                .map(postMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostDTO> findAllPostsByUser(String userName) {
+        return userRepository.findByUserName(userName)
+                .get()
+                .getPosts()
+                .stream()
+                .map(postMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
 
