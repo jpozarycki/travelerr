@@ -107,6 +107,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateDescription(String newDescription) {
+        SecurityUtils.getCurrentUserUserName()
+                .flatMap(userRepository::findOneByUserName)
+                .ifPresent(user -> {
+                    user.setDescription(newDescription);
+                });
+    }
+
+    @Override
     public List<UserDTO> findAll() {
         return userRepository.findAll()
                 .stream()

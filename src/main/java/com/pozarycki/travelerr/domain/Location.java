@@ -9,11 +9,9 @@ import java.util.List;
 public class Location extends BaseEntity {
 
     @NotNull
-    @NotNull
     @Column(name = "country", nullable = false)
     private String country;
 
-    @NotNull
     @NotNull
     @Column(name = "city", nullable = false)
     private String city;
@@ -40,7 +38,7 @@ public class Location extends BaseEntity {
     }
 
     @java.beans.ConstructorProperties({"country", "city", "posts"})
-    public Location(@NotNull @NotNull String country, @NotNull @NotNull String city, List<Post> posts) {
+    public Location(@NotNull String country, @NotNull String city, List<Post> posts) {
         this.country = country;
         this.city = city;
         this.posts = posts;
@@ -50,11 +48,11 @@ public class Location extends BaseEntity {
         return other instanceof Location;
     }
 
-    public @NotNull @NotNull String getCountry() {
+    public @NotNull String getCountry() {
         return this.country;
     }
 
-    public @NotNull @NotNull String getCity() {
+    public @NotNull String getCity() {
         return this.city;
     }
 
@@ -62,11 +60,11 @@ public class Location extends BaseEntity {
         return this.posts;
     }
 
-    public void setCountry(@NotNull @NotNull String country) {
+    public void setCountry(@NotNull String country) {
         this.country = country;
     }
 
-    public void setCity(@NotNull @NotNull String city) {
+    public void setCity(@NotNull String city) {
         this.city = city;
     }
 

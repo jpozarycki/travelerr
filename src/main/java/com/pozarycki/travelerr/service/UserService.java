@@ -17,4 +17,6 @@ public interface UserService extends CrudService<UserDTO, Long>{
 
     Optional<UserDTO> updateUser(UserDTO userDTO);
 
+    void updateDescription(String newDescription);
+
 }

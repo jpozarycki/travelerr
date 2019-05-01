@@ -25,10 +25,15 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
     @Email@Size(min = 5)
+    @NotNull
+    @Email
+    @Size(min = 5)
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Post> posts = new ArrayList<>();
@@ -36,13 +41,14 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    @java.beans.ConstructorProperties({"userName", "password", "firstName", "lastName", "email", "posts"})
-    public User(@NotNull String userName, @NotNull String password, String firstName, String lastName, @Email @NotNull  @Size(min = 5) String email, List<Post> posts) {
+    @java.beans.ConstructorProperties({"userName", "password", "firstName", "lastName", "email", "description", "posts"})
+    public User(@NotNull String userName, @NotNull String password, String firstName, String lastName, @Email @Size(min = 5) @NotNull @Email @Size(min = 5) String email, String description, List<Post> posts) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.description = description;
         this.posts = posts;
     }
 
@@ -66,8 +72,12 @@ public class User extends BaseEntity {
         return this.lastName;
     }
 
-    public @Email @Size(min = 5) @NotNull String getEmail() {
+    public @Email @Size(min = 5) @NotNull @Email @Size(min = 5) String getEmail() {
         return this.email;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public List<Post> getPosts() {
@@ -90,8 +100,12 @@ public class User extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public void setEmail(@Email @Size(min = 5) @NotNull String email) {
+    public void setEmail(@Email @Size(min = 5) @NotNull @Email @Size(min = 5) String email) {
         this.email = email;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setPosts(List<Post> posts) {
@@ -118,6 +132,10 @@ public class User extends BaseEntity {
         final Object this$email = this.getEmail();
         final Object other$email = other.getEmail();
         if (this$email == null ? other$email != null : !this$email.equals(other$email)) return false;
+        final Object this$description = this.getDescription();
+        final Object other$description = other.getDescription();
+        if (this$description == null ? other$description != null : !this$description.equals(other$description))
+            return false;
         final Object this$posts = this.getPosts();
         final Object other$posts = other.getPosts();
         if (this$posts == null ? other$posts != null : !this$posts.equals(other$posts)) return false;
@@ -137,12 +155,14 @@ public class User extends BaseEntity {
         result = result * PRIME + ($lastName == null ? 43 : $lastName.hashCode());
         final Object $email = this.getEmail();
         result = result * PRIME + ($email == null ? 43 : $email.hashCode());
+        final Object $description = this.getDescription();
+        result = result * PRIME + ($description == null ? 43 : $description.hashCode());
         final Object $posts = this.getPosts();
         result = result * PRIME + ($posts == null ? 43 : $posts.hashCode());
         return result;
     }
 
     public String toString() {
-        return "User(userName=" + this.getUserName() + ", password=" + this.getPassword() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", posts=" + this.getPosts() + ")";
+        return "User(userName=" + this.getUserName() + ", password=" + this.getPassword() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", description=" + this.getDescription() + ", posts=" + this.getPosts() + ")";
     }
 }
