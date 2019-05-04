@@ -35,7 +35,7 @@ public class User extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
 
     public User() {

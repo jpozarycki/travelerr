@@ -15,7 +15,6 @@ public class Post extends BaseEntity {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "location_id")
-    @Column(name = "location", nullable = false)
     private Location location;
 
     @NotNull
