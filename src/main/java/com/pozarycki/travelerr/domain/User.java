@@ -35,7 +35,12 @@ public class User extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_posts",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "post_title", referencedColumnName = "title")}
+    )
     private List<Post> posts = new ArrayList<>();
 
     public User() {

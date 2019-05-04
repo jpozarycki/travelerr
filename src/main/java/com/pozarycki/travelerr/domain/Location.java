@@ -16,8 +16,13 @@ public class Location extends BaseEntity {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "post")
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    @Column(name = "posts")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "location_posts",
+            joinColumns = {@JoinColumn(name = "location_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "post_title", referencedColumnName = "title")}
+    )
     private List<Post> posts;
 
     @java.beans.ConstructorProperties({"id", "country", "city"})

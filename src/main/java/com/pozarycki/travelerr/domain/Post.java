@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table (name = "post")
+@Table (name = "posts")
 public class Post extends BaseEntity {
 
     @NotNull
