@@ -47,7 +47,7 @@ public class User extends BaseEntity {
     }
 
     @java.beans.ConstructorProperties({"userName", "password", "firstName", "lastName", "email", "description", "posts"})
-    public User(@NotNull String userName, @NotNull String password, String firstName, String lastName, @Email @Size(min = 5) @NotNull @Email @Size(min = 5) String email, String description, List<Post> posts) {
+    public User(@NotNull String userName, @NotNull String password, String firstName, String lastName, @Email @Size(min = 5) @NotNull String email, String description, List<Post> posts) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
@@ -55,6 +55,10 @@ public class User extends BaseEntity {
         this.email = email;
         this.description = description;
         this.posts = posts;
+    }
+
+    public static UserBuilder builder() {
+        return new UserBuilder();
     }
 
     protected boolean canEqual(final Object other) {
@@ -169,5 +173,61 @@ public class User extends BaseEntity {
 
     public String toString() {
         return "User(userName=" + this.getUserName() + ", password=" + this.getPassword() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", description=" + this.getDescription() + ", posts=" + this.getPosts() + ")";
+    }
+
+    public static class UserBuilder {
+        private @NotNull String userName;
+        private @NotNull String password;
+        private String firstName;
+        private String lastName;
+        private @Email @Size(min = 5) @NotNull String email;
+        private String description;
+        private List<Post> posts;
+
+        UserBuilder() {
+        }
+
+        public UserBuilder userName(@NotNull String userName) {
+            this.userName = userName;
+            return this;
+        }
+
+        public UserBuilder password(@NotNull String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public UserBuilder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public UserBuilder email(@Email @Size(min = 5) @NotNull String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public UserBuilder posts(List<Post> posts) {
+            this.posts = posts;
+            return this;
+        }
+
+        public User build() {
+            return new User(userName, password, firstName, lastName, email, description, posts);
+        }
+
+        public String toString() {
+            return "User.UserBuilder(userName=" + this.userName + ", password=" + this.password + ", firstName=" + this.firstName + ", lastName=" + this.lastName + ", email=" + this.email + ", description=" + this.description + ", posts=" + this.posts + ")";
+        }
     }
 }

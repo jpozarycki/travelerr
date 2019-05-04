@@ -53,6 +53,10 @@ public class Post extends BaseEntity {
         this.user = user;
     }
 
+    public static PostBuilder builder() {
+        return new PostBuilder();
+    }
+
     protected boolean canEqual(final Object other) {
         return other instanceof Post;
     }
@@ -165,5 +169,61 @@ public class Post extends BaseEntity {
 
     public String toString() {
         return "Post(title=" + this.getTitle() + ", location=" + this.getLocation() + ", imageUrl=" + this.getImageUrl() + ", body=" + this.getBody() + ", publishDate=" + this.getPublishDate() + ", postType=" + this.getPostType() + ", user=" + this.getUser() + ")";
+    }
+
+    public static class PostBuilder {
+        private @NotNull String title;
+        private @NotNull Location location;
+        private @NotNull String imageUrl;
+        private @NotNull String body;
+        private @NotNull LocalDate publishDate;
+        private @NotNull PostType postType;
+        private @NotNull User user;
+
+        PostBuilder() {
+        }
+
+        public PostBuilder title(@NotNull String title) {
+            this.title = title;
+            return this;
+        }
+
+        public PostBuilder location(@NotNull Location location) {
+            this.location = location;
+            return this;
+        }
+
+        public PostBuilder imageUrl(@NotNull String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
+        public PostBuilder body(@NotNull String body) {
+            this.body = body;
+            return this;
+        }
+
+        public PostBuilder publishDate(@NotNull LocalDate publishDate) {
+            this.publishDate = publishDate;
+            return this;
+        }
+
+        public PostBuilder postType(@NotNull PostType postType) {
+            this.postType = postType;
+            return this;
+        }
+
+        public PostBuilder user(@NotNull User user) {
+            this.user = user;
+            return this;
+        }
+
+        public Post build() {
+            return new Post(title, location, imageUrl, body, publishDate, postType, user);
+        }
+
+        public String toString() {
+            return "Post.PostBuilder(title=" + this.title + ", location=" + this.location + ", imageUrl=" + this.imageUrl + ", body=" + this.body + ", publishDate=" + this.publishDate + ", postType=" + this.postType + ", user=" + this.user + ")";
+        }
     }
 }

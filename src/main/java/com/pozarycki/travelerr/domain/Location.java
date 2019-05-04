@@ -49,6 +49,10 @@ public class Location extends BaseEntity {
         this.posts = posts;
     }
 
+    public static LocationBuilder builder() {
+        return new LocationBuilder();
+    }
+
     protected boolean canEqual(final Object other) {
         return other instanceof Location;
     }
@@ -108,5 +112,37 @@ public class Location extends BaseEntity {
 
     public String toString() {
         return "Location(country=" + this.getCountry() + ", city=" + this.getCity() + ", posts=" + this.getPosts() + ")";
+    }
+
+    public static class LocationBuilder {
+        private Long id;
+        private @NotNull String country;
+        private @NotNull String city;
+
+        LocationBuilder() {
+        }
+
+        public LocationBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public LocationBuilder country(@NotNull String country) {
+            this.country = country;
+            return this;
+        }
+
+        public LocationBuilder city(@NotNull String city) {
+            this.city = city;
+            return this;
+        }
+
+        public Location build() {
+            return new Location(id, country, city);
+        }
+
+        public String toString() {
+            return "Location.LocationBuilder(id=" + this.id + ", country=" + this.country + ", city=" + this.city + ")";
+        }
     }
 }
