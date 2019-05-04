@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Collections;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -108,8 +109,21 @@ public class Bootstrap implements CommandLineRunner {
                 .user(user2)
                 .build();
 
-        postRepository.save(post1);
+        postRepository.save(post2);
 
+        saveUserPosts(user1, post1);
+        saveUserPosts(user2, post2);
 
+        saveLocationPosts(location1, post1);
+        saveLocationPosts(location2, post2);
+
+    }
+
+    private void saveUserPosts(User user, Post post){
+        user.setPosts(Collections.singletonList(post));
+    }
+
+    private void saveLocationPosts(Location location, Post post){
+        location.setPosts(Collections.singletonList(post));
     }
 }
