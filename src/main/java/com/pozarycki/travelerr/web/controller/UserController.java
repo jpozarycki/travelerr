@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -28,19 +27,22 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
-        final List<UserDTO> userDTOlist = userService.findAll();
-        return new ResponseEntity<List<UserDTO>>(userDTOlist, HttpStatus.OK);
+
+        List<UserDTO> userDTOList = userService.findAll();
+        return new ResponseEntity<List<UserDTO>>(userDTOList, HttpStatus.OK);
 
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<Optional<UserDTO>> getUserById(@PathVariable Long id) {
+
         Optional<UserDTO> userDTO = userService.findById(id);
         return new ResponseEntity<Optional<UserDTO>>(userDTO, HttpStatus.OK);
     }
 
     @PostMapping("/users")
     public ResponseEntity<Void> createUser(@RequestBody UserDTO userDTO){
+
         if(userService.findById(userDTO.getId()).isPresent()) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
@@ -54,9 +56,11 @@ public class UserController {
 
     @PutMapping("/users")
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDTO){
+
         if(userDTO.getId().equals(null)){
             throw new BadRequestAlertException("Invalid ID", "User", "idnull");
         }
+
         UserDTO resultUserDto = userService.save(userDTO);
         return new ResponseEntity<UserDTO>(resultUserDto, HttpStatus.OK);
 
@@ -64,6 +68,7 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
 

@@ -1,14 +1,17 @@
 package com.pozarycki.travelerr.service.impl;
 
+import com.pozarycki.travelerr.domain.Location;
 import com.pozarycki.travelerr.domain.Post;
 import com.pozarycki.travelerr.domain.dto.PostDTO;
 import com.pozarycki.travelerr.repository.LocationRepository;
 import com.pozarycki.travelerr.repository.PostRepository;
 import com.pozarycki.travelerr.repository.UserRepository;
 import com.pozarycki.travelerr.service.PostService;
+import com.pozarycki.travelerr.service.mapper.LocationMapper;
 import com.pozarycki.travelerr.service.mapper.PostMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,12 +22,14 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final PostMapper postMapper;
     private final LocationRepository locationRepository;
+    private final LocationMapper locationMapper;
     private final UserRepository userRepository;
 
-    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper, LocationRepository locationRepository, UserRepository userRepository) {
+    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper, LocationRepository locationRepository, LocationMapper locationMapper, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
         this.locationRepository = locationRepository;
+        this.locationMapper = locationMapper;
         this.userRepository = userRepository;
     }
 
@@ -90,6 +95,34 @@ public class PostServiceImpl implements PostService {
                 .stream()
                 .map(postMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Post createPost(Long userId, PostDTO postDTO) {
+        Post createdPost = postMapper.toEntity(postDTO);
+
+        if(!locationRepository.findByCity(postDTO.getLocationDTO().getCity()).isPresent()) {
+            Location location = Location.builder()
+                    .city(postDTO.getLocationDTO().getCity())
+                    .country(postDTO.getLocationDTO().getCity())
+                    .build();
+            locationRepository.save(location);
+        }
+
+        if(!locationRepository.findByCountry(postDTO.getLocationDTO().getCountry()).isPresent()) {
+            Location location = Location.builder()
+                    .city(postDTO.getLocationDTO().getCity())
+                    .country(postDTO.getLocationDTO().getCity())
+                    .build();
+            locationRepository.save(location);
+        } else {
+            locationRepository.findByCity(postDTO.getLocationDTO().getCity()).get()
+                    .setPosts(Collections.singletonList(createdPost));
+            userRepository.findById(userId).get()
+                    .setPosts(Collections.singletonList(createdPost));
+        }
+
+        return createdPost;
     }
 }
 
