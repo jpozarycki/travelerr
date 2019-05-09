@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -35,12 +36,6 @@ public class UserController {
     @GetMapping("/users/{id}")
     public ResponseEntity<Optional<UserDTO>> getUserById(@PathVariable Long id) {
         Optional<UserDTO> userDTO = userService.findById(id);
-        return new ResponseEntity<Optional<UserDTO>>(userDTO, HttpStatus.OK);
-    }
-
-    @GetMapping("/users/{userName}")
-    public ResponseEntity<Optional<UserDTO>> getUserByUserName(@PathVariable String userName) {
-        Optional<UserDTO> userDTO = userService.findByUserName(userName);
         return new ResponseEntity<Optional<UserDTO>>(userDTO, HttpStatus.OK);
     }
 
