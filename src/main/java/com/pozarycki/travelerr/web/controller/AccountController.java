@@ -1,6 +1,7 @@
 package com.pozarycki.travelerr.web.controller;
 
 import com.pozarycki.travelerr.domain.dto.PasswordChangeDTO;
+import com.pozarycki.travelerr.domain.dto.UserDTO;
 import com.pozarycki.travelerr.repository.UserRepository;
 import com.pozarycki.travelerr.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,4 +26,11 @@ public class AccountController {
 
         userService.changePassword(passwordChangeDTO.getCurrentPassword(), passwordChangeDTO.getNewPassword());
     }
+
+    @PutMapping("/account/update-info")
+    public void updateAccount(@RequestBody UserDTO userDTO) {
+
+        userService.updateInformation(userDTO);
+    }
+
 }

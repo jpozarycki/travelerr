@@ -13,10 +13,6 @@ public interface UserService extends CrudService<UserDTO, Long>{
 
     void changePassword(String currentPassword, String newPassword);
 
-    void updateUser(String firstName, String lastName, String email);
-
-    Optional<UserDTO> updateUser(UserDTO userDTO);
-
-    void updateDescription(String newDescription);
+    Optional<UserDTO> updateInformation(UserDTO userDTO);
 
 }

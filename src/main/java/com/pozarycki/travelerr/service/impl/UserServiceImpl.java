@@ -73,20 +73,9 @@ public class UserServiceImpl implements UserService {
                 });
     }
 
-    @Override
-    public void updateUser(String newFirstName, String newLastName, String newEmail) {
-        SecurityUtils.getCurrentUserUserName()
-                .flatMap(userRepository::findOneByUserName)
-                .ifPresent(user -> {
-                    user.setFirstName(newFirstName);
-                    user.setLastName(newLastName);
-                    user.setEmail(newEmail);
-                });
-
-    }
 
     @Override
-    public Optional<UserDTO> updateUser(UserDTO userDTO) {
+    public Optional<UserDTO> updateInformation(UserDTO userDTO) {
         return Optional.of(userRepository
         .findById(userDTO.getId()))
         .filter(Optional::isPresent)
@@ -102,15 +91,6 @@ public class UserServiceImpl implements UserService {
                 .map(UserDTO::new);
 
 
-    }
-
-    @Override
-    public void updateDescription(String newDescription) {
-        SecurityUtils.getCurrentUserUserName()
-                .flatMap(userRepository::findOneByUserName)
-                .ifPresent(user -> {
-                    user.setDescription(newDescription);
-                });
     }
 
     @Override
