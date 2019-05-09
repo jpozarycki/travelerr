@@ -111,6 +111,10 @@ public class Bootstrap implements CommandLineRunner {
 
         postRepository.save(post2);
 
+        /**
+         * Assign Posts to Users and Locations
+         */
+
         saveUserPosts(user1, post1);
         saveUserPosts(user2, post2);
 
